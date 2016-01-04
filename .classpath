@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/jscience.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/asm.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/bridj.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/bytecodelib.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/EJML-core-0.26.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/EJML-equation-0.26.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/EJML-experimental-0.26.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/guava.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/javax.json.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/JLargeArrays-1.2.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/joptsimple.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/JTransforms-3.0.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/ServiceProviderProcessor.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/sqlitejdbc.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/streamjit.jar"/>
+	<classpathentry kind="lib" path="E:/7th sem/my stuff/Project/FYP/StreamJIT/4G-LTEA-master/4G-LTEA-master/lib/weka-3.7.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
