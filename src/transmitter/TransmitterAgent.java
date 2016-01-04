@@ -7,7 +7,7 @@ import org.jscience.mathematics.number.Complex;
 
 public class TransmitterAgent {
 
-	public void startTransmission() throws IOException {
+	public static void main(String [] args) throws IOException {
 		String sourcepath = "E:\\workspace\\FinalProject\\football.ts";
 		String sourcebits;
 		sourcebits = BitsFromHex.getBitsFromSource(sourcepath);
