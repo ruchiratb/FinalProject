@@ -22,6 +22,7 @@ public class DataWriter extends edu.mit.streamjit.api.Pipeline<FEC_Frame, Byte>{
 
 		@Override
 		public void work() {
+			System.out.println("write to file----------------------");
 			FEC_Frame current_frame = pop();
 			boolean[] data_array = current_frame.getFEC_Data();
 			StringBuilder builder = new StringBuilder();
@@ -38,9 +39,10 @@ public class DataWriter extends edu.mit.streamjit.api.Pipeline<FEC_Frame, Byte>{
 			appendToFile(builder.toString());
 		}
 		
-		private void appendToFile(String text){
+		private static void appendToFile(String text){
 			try(
 					PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("final_output.txt", true)))) {
+					System.out.println("appending....");
 				    out.println(text);
 			}catch (IOException e) {
 				    e.printStackTrace();

@@ -2,20 +2,15 @@ package receiver;
 
 import transmitter.FEC_Frame;
 
-public class FEC_Builder extends edu.mit.streamjit.api.Pipeline<Byte, FEC_Frame> {
-	
-	public FEC_Builder() {
-		this.add(new BuildFEC()
-				, new Bit_DeInterleaver()
-				, new LDPC_Decoder()
-				, new BBHeaderRemovel()
-				, new DataWriter()
-		);
-	}
+public class FEC_Frame_Builder extends edu.mit.streamjit.api.Pipeline<Byte, FEC_Frame> {
 
-private static class BuildFEC extends edu.mit.streamjit.api.Filter<Byte, FEC_Frame> {
+	public FEC_Frame_Builder(){
+		this.add(new Build_FEC());
+	}
+	
+	private static class Build_FEC extends edu.mit.streamjit.api.Filter<Byte, FEC_Frame> {
 		
-		public BuildFEC() {
+		public Build_FEC() {
 			super(64800, 1);
 		}
 
@@ -35,5 +30,4 @@ private static class BuildFEC extends edu.mit.streamjit.api.Filter<Byte, FEC_Fra
 			push(frame);
 		}
 	}
-	
 }

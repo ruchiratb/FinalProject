@@ -1,6 +1,8 @@
 package receiver;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.ByteOrder;
 import java.nio.file.Paths;
 
@@ -19,7 +21,12 @@ import edu.mit.streamjit.test.Benchmarker;
 import edu.mit.streamjit.test.SuppliedBenchmark;
 
 public class ReceiverTerminal {
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
+		File file = new File("final_output.txt");
+		if(file.exists()){
+			file.delete();
+			file.createNewFile();
+		}
 		//compile2streamcompiler
 		Compiler2StreamCompiler sc = new Compiler2StreamCompiler();
 		sc.maxNumCores(4);
@@ -41,7 +48,6 @@ public class ReceiverTerminal {
 		
 		public ReceiverKernel() {
 			// filter blocks are executer according to this order
-//			this.add(new Add5(),new AddPair(),new Add5(),  new Printer());
 			this.add(new ExtractData()
 					,new FFT()
 					,new Constellation_Derotation()
@@ -49,7 +55,12 @@ public class ReceiverTerminal {
 					,new Maximum_Likelyhood_Mapper()
 					,new Constellation_De_mapper()
 					,new Multiplexer()
-					,new FEC_Builder()
+//					,new FEC_Builder()
+					,new FEC_Frame_Builder()
+					,new Bit_DeInterleaver()
+					,new LDPC_Decoder()
+					,new BBHeaderRemovel()
+					,new DataWriter()
 			);
 		}		
 	}

@@ -38,7 +38,7 @@ public class Maximum_Likelyhood_Mapper extends edu.mit.streamjit.api.Pipeline<Co
 //			System.out.println();
 		}
 		
-		Complex[] Maximum_Likelyhood_Out(Complex[] De_Normalizer_Out){
+		private static Complex[] Maximum_Likelyhood_Out(Complex[] De_Normalizer_Out){
 	        
 	        Complex [] max_likelyhood_out = new Complex[6];   //6=8100
 	        

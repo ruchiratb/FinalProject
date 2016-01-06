@@ -33,7 +33,7 @@ public class Constellation_De_mapper extends edu.mit.streamjit.api.Pipeline<Comp
 			push(demap_out);
 		}
 		
-		Eightout ConstDemapperOut(Complex [] max_likelyhoodout){
+		private static Eightout ConstDemapperOut(Complex [] max_likelyhoodout){
 	        
 	         boolean[] array0 = new boolean[6];
 	         boolean[] array1 = new boolean[6];

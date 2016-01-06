@@ -1,5 +1,7 @@
 package receiver;
 
+import java.util.Random;
+
 import org.jscience.mathematics.number.Complex;
 
 import edu.mit.streamjit.api.Filter;
@@ -12,10 +14,10 @@ import transmitter.Eightout;
 public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, Byte>{
     
 	public Multiplexer(){
-		
+		this.add(new do_Multiplexing());
 	}
 	
-private static class do_Multiplexing extends Filter<Eightout, Byte> {
+	private static class do_Multiplexing extends Filter<Eightout, Byte> {
 		
 		public do_Multiplexing() {
 			super(1, 64800);
@@ -25,9 +27,20 @@ private static class do_Multiplexing extends Filter<Eightout, Byte> {
 		public void work() {
 			Eightout eightout = pop();			
 			boolean[] streamout = MultiplexerOut(eightout);		
-			System.out.println("Multiplexer stream out size = "+streamout.length);
-			for (int i = 0; i < streamout.length; i++) {
-				if (streamout[i]) {
+			System.out.println("Multiplexer stream out size = "+streamout.length);	
+			
+//			for (int i = 0; i < streamout.length; i++) {
+//				if (streamout[i]) {
+//					push((byte) 1);
+//				}else {
+//					push((byte) 0);
+//				}
+//			}
+			
+			for (int i = 0; i < 64800; i++) {
+				Random rand = new Random();
+				int x = rand.nextInt(2);
+				if (x == 1) {
 					push((byte) 1);
 				}else {
 					push((byte) 0);
@@ -37,7 +50,7 @@ private static class do_Multiplexing extends Filter<Eightout, Byte> {
 		}
 		
 		
-		  boolean[] MultiplexerOut(Eightout eightout){
+		private static boolean[] MultiplexerOut(Eightout eightout){
 			 boolean[] array0 = eightout.getArray0();
 			 boolean[] array1 = eightout.getArray1();
 			 boolean[] array2 = eightout.getArray2();

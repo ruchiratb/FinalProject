@@ -2,7 +2,6 @@ package receiver;
 
 import org.jscience.mathematics.number.Complex;
 
-
 /**
  *
  * @author Nipuna Priyamal
@@ -31,7 +30,7 @@ private static class DeRotator extends edu.mit.streamjit.api.Filter<Complex, Com
 			}
 		}
 		
-		Complex[] De_Rotationout(Complex[] g){
+		private static Complex[] De_Rotationout(Complex[] g){
 	        
 	        double angle = Math.atan(0.0625)*180*(1/Math.PI);   //atan value should be in degrees
 	        double theta = (Math.PI)*angle/180;

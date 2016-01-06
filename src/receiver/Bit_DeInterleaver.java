@@ -24,7 +24,7 @@ private static class Bit_Deinterleave extends edu.mit.streamjit.api.Filter<FEC_F
 			push(interleaved_frame);
 		}
 		
-		private boolean[] bitInterleave(boolean[] fec_data) {
+		private static boolean[] bitInterleave(boolean[] fec_data) {
 			int N_ldpc = 64800;     //FECFREAME Size
 			int K_ldpc = 32400;     //BBFRAME+BCH Size
 			int Q_ldpc = 90;		//			

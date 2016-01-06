@@ -78,6 +78,13 @@ public class TransmitterAgent {
 		Super_Frame_Builder superframebuilder = new Super_Frame_Builder();
 		Super_Frame[] superframes = superframebuilder.getSuperFrames(t2frames);
 		System.out.println("======= number of super frames = "+superframes.length);
+		
+		// frequency interleave
+		
+		// IFFT
+		IFFT iff = new IFFT();
+		iff.doIFFT(superframes);
+		
 	}
 	
 	
