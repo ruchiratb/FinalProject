@@ -71,8 +71,12 @@ public class TransmitterAgent {
 		Constellation_rotation rotator = new Constellation_rotation();
 		Complex[] rotated_symbols = rotator.Rotationout(normalized_symbols);
 		
+		System.out.println("\n========================cell interleaving =========================");
+		Cell_Interleaver cell_int = new Cell_Interleaver();
+		Complex[] cell_interleaved_symbols = cell_int.do_cell_interleave(rotated_symbols);		
+		
 		T2_Frame_Builder t2framebuilder = new T2_Frame_Builder();
-		T2_Frame[] t2frames = t2framebuilder.getT2Frames(rotated_symbols);
+		T2_Frame[] t2frames = t2framebuilder.getT2Frames(cell_interleaved_symbols);
 		System.out.println("Number of T2 Frames = "+t2frames.length);
 		
 		Super_Frame_Builder superframebuilder = new Super_Frame_Builder();
