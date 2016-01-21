@@ -1,67 +1,31 @@
-package receiver;
-
-import java.nio.ByteOrder;
-import java.nio.file.Paths;
+package transmitter.streamjit;
 
 import org.jscience.mathematics.number.Complex;
-
-import com.jeffreybosboom.serviceproviderprocessor.ServiceProvider;
-
-import edu.mit.streamjit.api.Filter;
-import edu.mit.streamjit.api.Input;
-import edu.mit.streamjit.api.Pipeline;
-import edu.mit.streamjit.impl.compiler2.Compiler2StreamCompiler;
-import edu.mit.streamjit.test.Benchmark;
-import edu.mit.streamjit.test.Benchmarker;
-import edu.mit.streamjit.test.SuppliedBenchmark;
 
 /*
  * source: http://algs4.cs.princeton.edu/99scientific/FFT.java
  */
-public class FFT extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
+public class FFT {
 	
-	public FFT(){
-		this.add(new dofft());
-	}
-	/*public static void main(String[] args) {
-		 	int N = 8;
-		 	 Complex[] x = new Complex[N];
+	public static void main(String[] args) {
+		 int N = 16;
+	        Complex[] x = new Complex[N];
+
 	        // original data
-		 	for (int i = 0; i < N; i++) {
-	            x[i] = Complex.valueOf(i, 0);
-	            x[i] = Complex.valueOf(-2*Math.random() + 1, 0);	        
-	        }
-	        show(x, "x");
+//	        for (int i = 0; i < N; i++) {
+//	            x[i] = Complex.valueOf(i, 0);
+//	            x[i] = Complex.valueOf(-2*Math.random() + 1, 0);
+//	        }
+//	        show(x, "x");
 	        
 	     // FFT of original data
-	        Complex[] y = fft(x);
-	        show(y, "y = fft(x)");
-      
-	}*/
-		
-	private static class dofft extends Filter<Complex, Complex> {
-		
-		public dofft() {
-			super(4, 4);
-		}
-
-		@Override
-		public void work() {
-//			System.out.println("\ndo fft work method------------------------");
-			Complex[] before_fft = new Complex[4];
-			for (int i = 0; i < before_fft.length; i++) {
-				before_fft[i] = pop();
-			}
-			
-			Complex[] after_fft = new Complex[4];
-			after_fft = fft(before_fft);
-			
-			for (int i = 0; i < after_fft.length; i++) {
-				push(after_fft[i]);
-//				System.out.print(after_fft[i]+"\t");
-			}
-			System.out.println();
-		}
+//	        Complex[] y = fft(x);
+//	        show(y, "y = fft(x)");
+	        
+	        IFFT iff = new IFFT();
+	        Complex[] z = fft(iff.ifft());
+	        
+	        show(z, "z");
 	}
 	
     public static Complex[] fft(Complex[] x) {

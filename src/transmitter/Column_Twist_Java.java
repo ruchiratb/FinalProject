@@ -2,7 +2,7 @@ package transmitter;
 
 import java.util.ArrayList;
 
-public class Column_Twist {
+public class Column_Twist_Java {
 
 	public ArrayList<FEC_Frame> do_columntwist(ArrayList<FEC_Frame> frames) {
 		int N_ldpc = 64800;     //FECFREAME Size

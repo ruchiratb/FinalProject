@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Nipuna Priyamal
  */
-public class Scrambler {
+public class Scrambler_Java {
     
 //    public static void main(String[] args) {
 //

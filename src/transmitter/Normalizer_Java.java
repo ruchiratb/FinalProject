@@ -6,7 +6,7 @@ import org.jscience.mathematics.number.Complex;
  *
  * @author Nipuna Priyamal
  */
-public class Normalizer {
+public class Normalizer_Java {
     
     Complex[] Normalizerout(Complex[] Constmapout){
         int length = Constmapout.length;

@@ -1,17 +1,15 @@
-package receiver.java;
+package transmitter.streamjit;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-public class InputstreamBuilder {
+public class TransmitterInput {
 
 	public static void main(String[] args) {
-		int data_length=324000;		
+		int data_length=128512;		
 		
 		DataOutputStream out=null;
 //		DataInputStream in=null;

@@ -16,11 +16,11 @@ public class FEC_Frame {
 	final int frameLength = 64800; 
 	
 	final int Kbch = 32208;
-	boolean[] FEC_frame;
+	public boolean[] FEC_frame;
 	// LDPC + BCH = 64800 - 48600
 	// Kbch = DFL + Padding + 80
 
-	final int BBHeaderLength = 80;
+	public final int BBHeaderLength = 80;
 	final int DFL = Kbch - BBHeaderLength; // need padding of 48600-44600-80 bits	
 	final int pad = Kbch - DFL - BBHeaderLength;	
 

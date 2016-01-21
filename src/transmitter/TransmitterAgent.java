@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 import org.jscience.mathematics.number.Complex;
 
+/**
+ * 
+ * @author Ruchira
+ *
+ */
 public class TransmitterAgent {
 
 	public static void main(String [] args) throws IOException {
@@ -15,23 +20,23 @@ public class TransmitterAgent {
 		System.out.println("Total number of bits from source: " + sourcebits.length());
 		
 		ArrayList<FEC_Frame> frame_list = new ArrayList<FEC_Frame>();
-		InputInterface inpif = new InputInterface();
+		InputInterface_Java inpif = new InputInterface_Java();
 		frame_list = inpif.fill_DataField(sourcebits);
 		System.out.println("frames: "+frame_list.size());
 //		printDataField(frame_list);
 		
 		System.out.println("\n\n--------------------- After Header Insertion, before scrambler--------------------");
-		frame_list = BB_Header_Insertion.insertHeader(frame_list);
+		frame_list = BB_Header_Insertion_Java.insertHeader(frame_list);
 //		printDataField(frame_list);
 		
 		ArrayList<FEC_Frame> scrambbled_frames = new ArrayList<FEC_Frame>();
-		Scrambler scram = new Scrambler();
+		Scrambler_Java scram = new Scrambler_Java();
 		scrambbled_frames = scram.ScramblerOut(frame_list);
 		System.out.println("\n\n============== scrambled frames ======================");
 //		printDataField(scrambbled_frames);
 		
 		System.out.println("=========== BCH encode ===================");
-		Polynomial poly = new Polynomial();
+		Polynomial_Java poly = new Polynomial_Java();
 		ArrayList<FEC_Frame> bchencoded = poly.addrandom(scrambbled_frames);
 		System.out.println("bchencoded size ="+bchencoded.size());
 		System.out.println();
@@ -41,7 +46,7 @@ public class TransmitterAgent {
 		System.out.println("=========== LDPC encode ===================");
 		LdpcNewNew ldpc = new LdpcNewNew();
 		ArrayList<FEC_Frame> ldpcencoded = ldpc.doldpc(bchencoded);
-		System.out.println("bchencoded size ="+ldpcencoded.size());
+		System.out.println("ldpcencoded size ="+ldpcencoded.size());
 		System.out.println();
 		System.out.println("length ="+ldpcencoded.get(0).FEC_frame.length);
 		System.out.println();
@@ -52,7 +57,7 @@ public class TransmitterAgent {
 		System.out.println("    number of interleaved frames= "+interleaved_frames.size());
 		
 		System.out.println("================= Column Twist ======================");
-		Column_Twist twist = new Column_Twist();
+		Column_Twist_Java twist = new Column_Twist_Java();
 		ArrayList<FEC_Frame> twistedframes = twist.do_columntwist(interleaved_frames);
 		System.out.println("    number of twisted frames= "+twistedframes.size());
 		
@@ -65,7 +70,7 @@ public class TransmitterAgent {
 		Constellation_mapper mapper = new Constellation_mapper();
 		Complex[] initial_symbols = mapper.Cellqueue(demuxed_arrays);
 		
-		Normalizer norm = new Normalizer();
+		Normalizer_Java norm = new Normalizer_Java();
 		Complex[] normalized_symbols = norm.Normalizerout(initial_symbols);
 		
 		Constellation_rotation rotator = new Constellation_rotation();
@@ -84,6 +89,7 @@ public class TransmitterAgent {
 		System.out.println("======= number of super frames = "+superframes.length);
 		
 		// frequency interleave
+		
 		
 		// IFFT
 		IFFT iff = new IFFT();

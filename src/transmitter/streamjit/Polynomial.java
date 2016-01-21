@@ -1,51 +1,35 @@
-package transmitter;///FINAL bch ENCODER
-import java.io.BufferedReader;
-import java.io.FileReader;
+package transmitter.streamjit;///FINAL bch ENCODER
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
-public class Polynomial {
+import edu.mit.streamjit.api.Filter;
+import transmitter.FEC_Frame;
 
+public class Polynomial extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Frame>{
+	 
+	public Polynomial(){
+	    this.add(new BCH());	
+	}
+	
     private int[] coef;  // coefficients
     private int deg;     // degree of polynomial (0 for the zero polynomial)
-    
-    public ArrayList<FEC_Frame> bchEncode(ArrayList<FEC_Frame> frames) { 
         
-    int framecount = frames.size();
-    ArrayList<FEC_Frame> bchencodedframes = new ArrayList<FEC_Frame>();
-    
-    
-/*        String fileNameo="C:\\Users\\User\\Desktop\\binarybch.txt";
-       try{
-          FileReader inputFile = new FileReader(fileNameo);
-          BufferedReader bufferReader = new BufferedReader(inputFile);
-          String line;
-          Scanner scan;
-          int x=0;
-          
-          while ((line = bufferReader.readLine()) != null)   {
-            scan = new Scanner(line);
-                while(scan.hasNextInt()){
-                int t;
-                    t = scan.nextInt();
-                input[x] =t;
-                x++;
-                }
-          }
-          System.out.println(x);
-          bufferReader.close();
-       }catch(Exception e){
-          System.out.println("Error while reading file line by line:" + e.getMessage());                      
-       }*/
-       
-      /*  int[] input = new int[50000];
-        for( int i=0; i<50000; i++ ){
-        input[i] = 0;
-        }*/
-        
-    
-    	for (int k = 0; k < framecount; k++) {
+   
+	private static class BCH extends Filter<FEC_Frame, FEC_Frame> {
+		
+		public BCH() {
+			super(1, 1);
+		}
+
+		@Override
+		public void work() {
+			System.out.println("============ Polynomial ================");
+			FEC_Frame frame = pop();
+			FEC_Frame frame2 = bchEncode(frame);
+			push(frame2);
+		}
+	}
+	
+    public static FEC_Frame bchEncode(FEC_Frame frame) { 
     		boolean[] outarray = new boolean[32400];    
     		Polynomial zero = new Polynomial(0, 0);
     		Polynomial p = zero;
@@ -53,12 +37,10 @@ public class Polynomial {
     		
     		Polynomial gtotal = new Polynomial(1, 0);
     		Polynomial[] arr = new Polynomial[32208];
-    		FEC_Frame current_frame = frames.get(k);
+    		FEC_Frame current_frame = frame;
     		boolean[] bits = current_frame.FEC_frame;
     		System.arraycopy(bits, 0, outarray, 0, bits.length);
-    		
-
-    		
+    		    		
     		
     		//-------------------------------------------------------------------------------
     		
@@ -144,17 +126,15 @@ public class Polynomial {
     			
     		}
     		
-    		bchencodedframes.add(new FEC_Frame(outarray));
-    		//////////////////////////////////////////////////////////////////////////////////
+//    		bchencodedframes.add(new FEC_Frame(outarray));
+/*    		//////////////////////////////////////////////////////////////////////////////////
     		for( int i=0; i<32400; i++ ){
     			System.out.println("output =        " + outarray[i]  );
     			System.out.println("output =        " + i  );
-    		} 
-    		
-    		
-    	}
+    		}*/ 
+    		   		
     	    	
-    	return bchencodedframes;
+    	return new FEC_Frame(outarray);
 			
 		}
     
@@ -193,12 +173,7 @@ public class Polynomial {
         coef[b] = a;
         deg = degree();
     }
-    
-    
-    public Polynomial(){
-    	
-    }
-
+ 
     // return the degree of this polynomial (0 for the zero polynomial)
     public int degree() {
         int d = 0;

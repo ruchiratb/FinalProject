@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * This has a length of 8 bytes (80 bits)
  * MATTYPE(2), UPL(2), DFL(2), SYNC(1), SYNCD(2), CRC-8 MODE(1)	
  */
-public class BB_Header_Insertion {
+public class BB_Header_Insertion_Java {
 
 	/*public static void main(String[] args) {
 		printHeader();

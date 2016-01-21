@@ -5,13 +5,16 @@ import java.util.BitSet;
 public class P2_Symbol {
 	static int count0 = 0, count1;
 	static BitSet P2 = new BitSet();
-	static int NUM_T2_FRAMES = 2, NUM_DATA_SYMBOLS = 8;
+	public static int NUM_T2_FRAMES = 2;
+	public static int NUM_DATA_SYMBOLS = 8;
+	
 	public static void main(String[] args) {
 		BitSet pre = new BitSet();
 		BitSet post = new BitSet();
 		pre = getL1PreSignal();
 		post = getL1PostSymbol();
 	}
+	
 	static BitSet getL1PreSignal(){
 		BitSet L1_pre_signalling = new BitSet(200);
 		int index = 0;
