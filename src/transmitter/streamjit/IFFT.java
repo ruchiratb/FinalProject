@@ -9,6 +9,8 @@ import org.jscience.mathematics.number.Complex;
 
 import edu.mit.streamjit.api.Filter;
 
+// show method calls are commented
+
 public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 	
 	public IFFT(){
@@ -18,7 +20,7 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 	private static class InverseFourier extends Filter<Super_Frame, Complex> {
 		
 		public InverseFourier() {
-			super(1, 16);
+			super(1, 128);
 		}
 
 		@Override
@@ -30,10 +32,22 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 			 Complex[] x1 = t1.data;
 			 Complex[] x2 = t2.data;
 			 
+/*			 Complex[] X = new Complex[32768];
+			 for (int i = 0; i < x1.length; i++) {
+				X[i] = x1[i];
+			 }
+			 for (int i = x2.length; i < X.length; i++) {
+				X[i] = x2[i - x2.length];
+			 }
+			 Complex[] Y = ifft(X);
+			 for (int i = 0; i < Y.length; i++) {
+				push(Y[i]);
+			 }*/
+			 
 			 Complex[] y1 = doIFFT(x1);
 			 for (int i = 0; i < y1.length; i++) {
 				push(y1[i]);
-			}
+			 }
 			 
 			 Complex[] y2 = doIFFT(x2);
 			 for (int i = 0; i < y2.length; i++) {
@@ -48,10 +62,10 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 		 StringBuilder builder = new StringBuilder();
 		 
 		     
-		     show(x, "x");		        
+//		     show(x, "x");		        
 		     // take inverse FFT
 		     Complex[] y = ifft(x);
-	         show(y, "y = ifft(x)");
+//	         show(y, "y = ifft(x)");
 	        /* 
 	         builder.setLength(0);
 	         for (int i = 0; i < y1.length; i++) {
@@ -100,7 +114,7 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
                x[i] = Complex.valueOf(i, 0);
 	           x[i] = Complex.valueOf(-2*Math.random() + 1, 0);
         }
-	     show(x, "x");
+//	     show(x, "x");
 	      
         Complex[] y = new Complex[N];
 

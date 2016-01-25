@@ -18,12 +18,12 @@ public class Constellation_De_mapper extends edu.mit.streamjit.api.Pipeline<Comp
 	private static class Demapper extends Filter<Complex, Eightout> {		
 		
 		public Demapper() {
-			super(6, 1);
+			super(8, 1);
 		}
 
 		@Override
 		public void work() {
-			Complex[] ML_out = new Complex[6];
+			Complex[] ML_out = new Complex[8];
 			for (int i = 0; i < ML_out.length; i++) {
 				ML_out[i] = pop();
 			}
@@ -35,16 +35,16 @@ public class Constellation_De_mapper extends edu.mit.streamjit.api.Pipeline<Comp
 		
 		private static Eightout ConstDemapperOut(Complex [] max_likelyhoodout){
 	        
-	         boolean[] array0 = new boolean[6];
-	         boolean[] array1 = new boolean[6];
-	         boolean[] array2 = new boolean[6];
-	         boolean[] array3 = new boolean[6];
-	         boolean[] array4 = new boolean[6];
-	         boolean[] array5 = new boolean[6];
-	         boolean[] array6 = new boolean[6];
-	         boolean[] array7 = new boolean[6];
+	         boolean[] array0 = new boolean[8];
+	         boolean[] array1 = new boolean[8];
+	         boolean[] array2 = new boolean[8];
+	         boolean[] array3 = new boolean[8];
+	         boolean[] array4 = new boolean[8];
+	         boolean[] array5 = new boolean[8];
+	         boolean[] array6 = new boolean[8];
+	         boolean[] array7 = new boolean[8];
 	              
-	         for(int i=0; i<6; i++){//3 == 4050
+	         for(int i=0; i<8; i++){//3 == 4050
 	             
 	               int real = 0;
 	               int img  = 0;

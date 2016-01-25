@@ -20,6 +20,7 @@ private static class DeRotator extends edu.mit.streamjit.api.Filter<Complex, Com
 
 		@Override
 		public void work() {
+			System.out.println("----------constellation de-rotation-----------");
 			Complex[] before_rotate = new Complex[6];
 			for (int i = 0; i < before_rotate.length; i++) {
 				before_rotate[i] = pop();
@@ -39,8 +40,9 @@ private static class DeRotator extends edu.mit.streamjit.api.Filter<Complex, Com
 	        double img = Math.sin(theta*(Math.PI)/180);
 	        Complex RQD = Complex.valueOf(real, img);
 	        System.out.println("RQD = "+RQD.getReal()+"\t"+RQD.getImaginary()+"\n");
-	        
+	        System.gc();
 	        Complex de_rotationout[] = new Complex[6];
+	        
 	        for(int i=0; i<6; i++){
 	            if(i!=5){                       // 5 = (no of cells -1)
 	                double f_real = g[i].getReal();

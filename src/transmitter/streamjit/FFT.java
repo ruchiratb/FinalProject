@@ -8,7 +8,7 @@ import org.jscience.mathematics.number.Complex;
 public class FFT {
 	
 	public static void main(String[] args) {
-		 int N = 16;
+		 int N = 64;
 	        Complex[] x = new Complex[N];
 
 	        // original data

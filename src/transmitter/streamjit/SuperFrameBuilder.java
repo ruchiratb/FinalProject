@@ -16,6 +16,7 @@ public class SuperFrameBuilder extends edu.mit.streamjit.api.Pipeline<T2_Frame, 
 
 		@Override
 		public void work() {
+			System.out.println("============= Super Frame Builder =============");
 			T2_Frame[] t2frames = new T2_Frame[2];	
 			t2frames[0] = pop();
 			t2frames[1] = pop();

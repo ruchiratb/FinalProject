@@ -11,12 +11,12 @@ import java.util.Random;
 public class InputstreamBuilder {
 
 	public static void main(String[] args) {
-		int data_length=324000;		
+		int data_length=100;		
 		
 		DataOutputStream out=null;
 //		DataInputStream in=null;
 		try {
-			out = new DataOutputStream(new FileOutputStream("transmitter_data.in"));
+			out = new DataOutputStream(new FileOutputStream("E:\\workspace\\FYP\\data.in"));
 //			in = new DataInputStream(new FileInputStream("data.in"));				
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -25,7 +25,7 @@ public class InputstreamBuilder {
 		Random r=new Random();
 				
 		for (int i = 0; i < data_length; i++) {
-			int l=r.nextInt(2);		
+			byte l=(byte) r.nextInt(100);		
 			
 			try {
 				out.write(l);

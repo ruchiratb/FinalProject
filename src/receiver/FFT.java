@@ -42,18 +42,18 @@ public class FFT extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
 	private static class dofft extends Filter<Complex, Complex> {
 		
 		public dofft() {
-			super(4, 4);
+			super(64, 64);
 		}
 
 		@Override
 		public void work() {
 //			System.out.println("\ndo fft work method------------------------");
-			Complex[] before_fft = new Complex[4];
+			Complex[] before_fft = new Complex[64];
 			for (int i = 0; i < before_fft.length; i++) {
 				before_fft[i] = pop();
 			}
 			
-			Complex[] after_fft = new Complex[4];
+			Complex[] after_fft = new Complex[64];
 			after_fft = fft(before_fft);
 			
 			for (int i = 0; i < after_fft.length; i++) {

@@ -57,11 +57,14 @@ public class TransmitterTerminal {
 					, new Normalizer()
 					, new ConstellationRotator()
 					, new CellInterleaver()
+//					, new GCD_4()
 					, new T2FrameBuilder()
 					, new SuperFrameBuilder()
 					, new IFFT()
 					, new Rician_Channel()
 					, new ReceiverTerminal_2()
+//					, new DataWriter()
+//					, new ReceiverTerminal_2()
 			);
 		}		
 	}

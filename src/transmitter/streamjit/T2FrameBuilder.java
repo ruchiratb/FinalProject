@@ -14,13 +14,13 @@ public class T2FrameBuilder extends edu.mit.streamjit.api.Pipeline<Complex, T2_F
 	private static class T2_Builder extends Filter<Complex, T2_Frame> {
 		
 		public T2_Builder() {
-			super(4, 1);   // 32768
+			super(64, 1);   // 32768
 		}
 
 		@Override
 		public void work() {
 			System.out.println("============ T2 Frame Builder ================");
-			Complex[] cells = new Complex[4];
+			Complex[] cells = new Complex[64];
 			for (int i = 0; i < cells.length; i++) {
 				cells[i] = pop();
 			}

@@ -36,9 +36,9 @@ public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, Byte>{
 //					push((byte) 0);
 //				}
 //			}
+			Random rand = new Random();
 			
 			for (int i = 0; i < 64800; i++) {
-				Random rand = new Random();
 				int x = rand.nextInt(2);
 				if (x == 1) {
 					push((byte) 1);

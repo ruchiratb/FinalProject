@@ -32,9 +32,9 @@ public class Rician_Channel extends edu.mit.streamjit.api.Pipeline<Complex, Comp
 			Complex[] y = rician_effect(x);
 			Complex[] z = addAWGN(y);
 			
-			print(x, "x values");
-			print(y, "y values");
-			print(z, "z values_after awgn");
+//			print(x, "x values");
+//			print(y, "y values");
+//			print(z, "z values_after awgn");
 			
 			for (int i = 0; i < z.length; i++) {
 				push(z[i]);
@@ -117,7 +117,7 @@ public class Rician_Channel extends edu.mit.streamjit.api.Pipeline<Complex, Comp
 			den = Math.sqrt(sum_of_squares);
 			y[i] = num.divide(den);
 		}
-		
+		System.gc();
 		return y;		
 	}
 	

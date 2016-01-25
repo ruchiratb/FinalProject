@@ -16,9 +16,9 @@ public class ReceiverTerminal_2 extends edu.mit.streamjit.api.Pipeline<Complex, 
 			this.add(
 					new FFT()
 					,new Constellation_Derotation()
-//					,new De_Normalizer()
-//					,new Maximum_Likelyhood_Mapper()
-//					,new Constellation_De_mapper()
+					,new De_Normalizer()
+					,new Maximum_Likelyhood_Mapper()
+					,new Constellation_De_mapper()
 //					,new Multiplexer()
 //					,new FEC_Frame_Builder()
 //					,new Bit_DeInterleaver()

@@ -39,9 +39,9 @@ public class CellInterleaver extends edu.mit.streamjit.api.Pipeline<Complex, Com
 		int data_length = cells.length;
 		int blocks = data_length/N_Cells;
 		int index = 0;
-		
+
+		Complex In[] = new Complex[N_Cells];   // this was inside loop
 		for (int t = 0; t < blocks; t++) {
-			Complex In[] = new Complex[N_Cells];
 			for (int j = 0; j < N_Cells; j++) {
 				index = t*N_Cells + j; 
 				In[j] = cells[index];
