@@ -10,6 +10,7 @@ public class Constellation_rotation {
     
     Complex[] Rotationout(Complex[] Normalizerout){
         int length = Normalizerout.length;
+        System.out.println("constellation rotation length "+length);
         double angle = Math.atan(0.0625)*180*(1/Math.PI);   //atan value should be in degrees
         double theta = (Math.PI)*angle/180;
         System.out.println("theta = "+theta);

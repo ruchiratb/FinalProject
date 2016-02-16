@@ -35,10 +35,10 @@ public class ExtractData extends edu.mit.streamjit.api.Pipeline<Byte, Complex>{
 		public void work(){
 			Random rand = new Random();
 			byte real, img;
-			System.out.println();
+//			System.out.println();
 			for (int i = 0; i < 64; i++) {
 				real = pop(); img=pop();
-				System.out.print("pair : "+real+" "+img+" ");
+//				System.out.print("pair : "+real+" "+img+" ");
 				Complex out = Complex.valueOf(real+rand.nextGaussian(), img+rand.nextGaussian());
 				push(out);
 			}

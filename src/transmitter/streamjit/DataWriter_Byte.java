@@ -14,13 +14,13 @@ import org.jscience.mathematics.number.Complex;
 import edu.mit.streamjit.api.Filter;
 import transmitter.FEC_Frame;
 
-public class DataWriter extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
+public class DataWriter_Byte extends edu.mit.streamjit.api.Pipeline<Byte, Byte>{
 	
-	public DataWriter(){
+	public DataWriter_Byte(){
 		this.add(new WriteToFile());
 	}
 	
-	private static class WriteToFile extends edu.mit.streamjit.api.Filter<Complex, Complex> {
+	private static class WriteToFile extends edu.mit.streamjit.api.Filter<Byte, Byte> {
 		
 		public WriteToFile() {
 			super(64, 64);
@@ -29,15 +29,15 @@ public class DataWriter extends edu.mit.streamjit.api.Pipeline<Complex, Complex>
 		@Override
 		public void work() {
 			System.out.println("write to file----------------------");
-			Complex[] data_array = new Complex[64];
+			Byte[] data_array = new Byte[64];
 			StringBuilder builder = new StringBuilder();
-			Complex temp;
+			Byte temp;
 			for (int i = 0; i < data_array.length; i++) {
 				temp = pop();
 				data_array[i] = temp;
 //				builder.append(temp.getReal()+" "+temp.getImaginary()+" ");
 //				builder.append((int)temp.getReal()+" "+(int)temp.getImaginary()+" ");
-				appendToFile2((byte)temp.getReal(), (byte)temp.getImaginary());
+				appendToFile2(temp);
 			}
 			System.out.println("write...."+ builder.toString());
 //			appendToFile2(builder.toString());
@@ -53,7 +53,7 @@ public class DataWriter extends edu.mit.streamjit.api.Pipeline<Complex, Complex>
 			}
 		}
 		
-		private static void appendToFile2(byte real, byte img){
+		private static void appendToFile2(byte data){
 			
 			DataOutputStream out=null;
 //			DataInputStream in=null;
@@ -66,8 +66,7 @@ public class DataWriter extends edu.mit.streamjit.api.Pipeline<Complex, Complex>
 			}						
 				
 				try {
-					out.write(real);
-					out.write(img);
+					out.write(data);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

@@ -19,7 +19,7 @@ public class T2FrameBuilder extends edu.mit.streamjit.api.Pipeline<Complex, T2_F
 
 		@Override
 		public void work() {
-			System.out.println("============ T2 Frame Builder ================");
+//			System.out.println("============ T2 Frame Builder ================");
 			Complex[] cells = new Complex[64];
 			for (int i = 0; i < cells.length; i++) {
 				cells[i] = pop();

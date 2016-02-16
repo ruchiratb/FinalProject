@@ -9,7 +9,7 @@ public class FEC_Builder extends edu.mit.streamjit.api.Pipeline<Byte, FEC_Frame>
 				, new Bit_DeInterleaver()
 				, new LDPC_Decoder()
 				, new BBHeaderRemovel()
-				, new DataWriter()
+				, new PushDataBits()
 		);
 	}
 

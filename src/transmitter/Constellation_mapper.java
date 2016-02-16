@@ -28,7 +28,7 @@ public class Constellation_mapper {
          Complex Constmapout[] = new Complex[length]; //6=8100
       
          
-         for(int i=0; i<length; i++){        //3 == 4050
+         for(int i=0; i<4050; i++){        //3 == 4050
              
             if(array0[i]==true){
                 real    = real  + (int)(Math.pow(2, 0));

@@ -16,8 +16,10 @@ public class TransmitterAgent {
 		String sourcepath = "E:\\workspace\\FinalProject\\football.ts";
 		String sourcebits;
 		sourcebits = BitsFromHex.getBitsFromSource(sourcepath);
-//		System.out.println("source bits:\n" + sourcebits);
-		System.out.println("Total number of bits from source: " + sourcebits.length());
+	/*	for (int i = 0; i < 800; i++) {
+			System.out.print(sourcebits.charAt(i));
+		}*/
+		System.out.println("\nTotal number of bits from source: " + sourcebits.length());
 		
 		ArrayList<FEC_Frame> frame_list = new ArrayList<FEC_Frame>();
 		InputInterface_Java inpif = new InputInterface_Java();
@@ -40,16 +42,16 @@ public class TransmitterAgent {
 		ArrayList<FEC_Frame> bchencoded = poly.addrandom(scrambbled_frames);
 		System.out.println("bchencoded size ="+bchencoded.size());
 		System.out.println();
-		System.out.println("length ="+bchencoded.get(1).FEC_frame.length);
-		System.out.println();
+//		System.out.println("length ="+bchencoded.get(1).FEC_frame.length);
+//		System.out.println();
 		
 		System.out.println("=========== LDPC encode ===================");
 		LdpcNewNew ldpc = new LdpcNewNew();
 		ArrayList<FEC_Frame> ldpcencoded = ldpc.doldpc(bchencoded);
 		System.out.println("ldpcencoded size ="+ldpcencoded.size());
 		System.out.println();
-		System.out.println("length ="+ldpcencoded.get(0).FEC_frame.length);
-		System.out.println();
+//		System.out.println("length ="+ldpcencoded.get(0).FEC_frame.length);
+//		System.out.println();
 		
 		System.out.println("================= Bit Interleave ======================");
 		Parity_Interleave bitint = new Parity_Interleave();

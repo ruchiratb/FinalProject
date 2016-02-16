@@ -18,11 +18,13 @@ import edu.mit.streamjit.impl.compiler2.Compiler2StreamCompiler;
 import edu.mit.streamjit.test.Benchmark;
 import edu.mit.streamjit.test.Benchmarker;
 import edu.mit.streamjit.test.SuppliedBenchmark;
+import receiver.ByteToSource;
 import receiver.ReceiverTerminal_2;
 import transmitter.FEC_Frame;
 
 public class TransmitterTerminal {
-	public static void main(String[] args) throws InterruptedException, IOException {		
+	public static void main(String[] args) throws InterruptedException, IOException {	
+		System.out.println("========================== TRANSMITTER START =============================");
 		//compile2streamcompiler
 		Compiler2StreamCompiler sc = new Compiler2StreamCompiler();
 		sc.maxNumCores(4);
@@ -33,8 +35,8 @@ public class TransmitterTerminal {
 	@ServiceProvider(Benchmark.class)
 	public static final class TransmitterBenchmark extends SuppliedBenchmark {
 		public TransmitterBenchmark() {
-			super("Transmitter", TransmitterKernel.class, new Dataset("transmitter_data.in",
-					(Input)Input.fromBinaryFile(Paths.get("transmitter_data.in"), Byte.class, ByteOrder.LITTLE_ENDIAN)
+			super("Transmitter", TransmitterKernel.class, new Dataset("E:\\videocoding\\yuv\\randomsource.yuv",
+					(Input)Input.fromBinaryFile(Paths.get("E:\\videocoding\\yuv\\randomsource.yuv"), Byte.class, ByteOrder.LITTLE_ENDIAN)
 //					, (Supplier)Suppliers.ofInstance((Input)Input.fromBinaryFile(Paths.get("/home/jbosboom/streamit/streams/apps/benchmarks/asplos06/fft/streamit/FFT5.out"), Float.class, ByteOrder.LITTLE_ENDIAN))
 			));
 		}
@@ -45,26 +47,28 @@ public class TransmitterTerminal {
 		public TransmitterKernel() {
 			this.add(
 //					new Print()
-					new InputInterface()
+					new ByteToBits()
+					, new InputInterface()
 					, new BB_Header_Insertion()
 					, new Scrambler()
-					, new FakePolynomial()
-					, new LDPC()
+//	//				, new FakePolynomial()  // 32400 is already filled in input interface stage
+//					, new LDPC()
 					, new Parity_Interleaver()
 					, new Column_Twist()
 					, new Demux()
 					, new ConstellationMapper()
-					, new Normalizer()
-					, new ConstellationRotator()
-					, new CellInterleaver()
-//					, new GCD_4()
-					, new T2FrameBuilder()
-					, new SuperFrameBuilder()
-					, new IFFT()
-					, new Rician_Channel()
+//					, new Normalizer()
+//					, new ConstellationRotator()
+//	//				, new CellInterleaver()
+//	//				, new GCD_4()
+//					, new T2FrameBuilder()
+//					, new SuperFrameBuilder()
+//	//				, new IFFT() 
+//					 new Byte_Pop_Push()
+//	//				, new Rician_Channel()
 					, new ReceiverTerminal_2()
-//					, new DataWriter()
-//					, new ReceiverTerminal_2()
+//				, new ByteToSource()
+//	//				, new ReceiverTerminal_2()
 			);
 		}		
 	}
@@ -83,6 +87,40 @@ public class TransmitterTerminal {
 		}
 		
 	}
+	
+private static class ByteToBits extends Filter<Byte, Byte> {
+		
+		public ByteToBits() {
+			super(1, 8);
+		}
+
+		@Override
+		public void work() {
+			byte n = pop();
+//			System.out.println(n);
+			String s = String.format("%8s", Integer.toBinaryString(n)).replace(' ', '0');
+			
+			// for negative numbers toBinaryString method returns a string with length 32. Need to get the 8 rightmost values of it.
+			if (s.length() > 8) {
+				s = s.substring(s.length()-8, s.length());
+			}
+//			System.out.println(n+"    "+s);
+//			System.out.println(s);
+			
+
+			byte x;
+			for (int i = 0; i < s.length(); i++) {
+				if (s.charAt(i) == '1') {
+					x = 1;
+				} else {
+					x = 0;
+				}
+				push(x);
+			}
+		}
+		
+	}
+	
 	
 	private static class FakePolynomial extends Filter<FEC_Frame, FEC_Frame> {
 		
@@ -104,6 +142,9 @@ public class TransmitterTerminal {
 		}
 		
 	}
+	
+	
+	
 /*	
 	private static class Fill_Data_Field extends Filter<Byte, FEC_Frame> {
 		

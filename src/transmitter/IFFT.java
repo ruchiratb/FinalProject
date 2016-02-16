@@ -148,6 +148,7 @@ public class IFFT {
 				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("transmitter_complex_out.txt", true)))) {
 				System.out.println("appending....");
 			    out.println(text);
+			    System.out.println("Done Appending");
 		}catch (IOException e) {
 			    e.printStackTrace();
 		}

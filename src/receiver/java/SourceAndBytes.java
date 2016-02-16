@@ -27,6 +27,9 @@ public class SourceAndBytes {
 //		WIDTH = 352, HEIGHT = 288
 		Path path = Paths.get("E:\\videocoding\\yuv\\stefan.yuv");
 		byte[] randomdata = Files.readAllBytes(path);
+		for (int i = 0; i < randomdata.length; i++) {
+			randomdata[i] = (byte) (randomdata[i] +10);
+		}
 		byteToSource(randomdata);
 
 	}

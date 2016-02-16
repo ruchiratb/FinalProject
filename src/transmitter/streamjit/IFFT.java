@@ -44,19 +44,85 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 				push(Y[i]);
 			 }*/
 			 
-			 Complex[] y1 = doIFFT(x1);
+			 Complex[] y1 = ifft(x1);
 			 for (int i = 0; i < y1.length; i++) {
 				push(y1[i]);
 			 }
 			 
-			 Complex[] y2 = doIFFT(x2);
+			 Complex[] y2 = ifft(x2);
 			 for (int i = 0; i < y2.length; i++) {
 				push(y2[i]);
 			}
 		}
+		
+		 public static Complex[] ifft(Complex[] x) {
+		        int N = x.length;
+		        Complex[] y = new Complex[N];
+
+		        // take conjugate
+		        for (int i = 0; i < N; i++) {
+		            y[i] = x[i].conjugate();
+		        }
+
+		        // compute forward FFT
+		        y = fft(y);
+
+		        // take conjugate again
+		        for (int i = 0; i < N; i++) {
+		            y[i] = y[i].conjugate();
+		        }
+
+		        // divide by N
+		        for (int i = 0; i < N; i++) {
+//		            y[i] = y[i].scale(1.0 / N);
+		        	y[i] = y[i].divide(N);
+		        }
+
+		        return y;
+
+		    }
+		 
+
+			
+		    public static Complex[] fft(Complex[] x) {
+		        int N = x.length;
+
+		        // base case
+		        if (N == 1) return new Complex[] { x[0] };
+
+		        // radix 2 Cooley-Tukey FFT
+		        if (N % 2 != 0) {
+		            throw new IllegalArgumentException("N is not a power of 2");
+		        }
+
+		        // fft of even terms
+		        Complex[] even = new Complex[N/2];
+		        for (int k = 0; k < N/2; k++) {
+		            even[k] = x[2*k];
+		        }
+		        Complex[] q = fft(even);
+
+		        // fft of odd terms
+		        Complex[] odd  = even;  // reuse the array
+		        for (int k = 0; k < N/2; k++) {
+		            odd[k] = x[2*k + 1];
+		        }
+		        Complex[] r = fft(odd);
+
+		        // combine
+		        Complex[] y = new Complex[N];
+		        for (int k = 0; k < N/2; k++) {
+		            double kth = -2 * k * Math.PI / N;
+		            Complex wk = Complex.valueOf(Math.cos(kth), Math.sin(kth));
+		            y[k]       = q[k].plus(wk.times(r[k]));
+		            y[k + N/2] = q[k].minus(wk.times(r[k]));
+		        }
+		        return y;
+		    }
+		    
 	}
-	
-	public static Complex[] doIFFT(Complex[] x) {
+/*	
+	static Complex[] doIFFT(Complex[] x) {
 		 int N = 16;
 		 Complex[] ifft_data = new Complex[2];
 		 StringBuilder builder = new StringBuilder();
@@ -66,17 +132,19 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 		     // take inverse FFT
 		     Complex[] y = ifft(x);
 //	         show(y, "y = ifft(x)");
-	        /* 
+	         
 	         builder.setLength(0);
 	         for (int i = 0; i < y1.length; i++) {
 				builder.append(y1[i]+"\t");
 	         }
 	         
 	         appendToFile(builder.toString());
-	     */
+	     
 	         return y;
 	}
+*/	
 	
+/*	
     public static Complex[] ifft(Complex[] x) {
         int N = x.length;
         Complex[] y = new Complex[N];
@@ -103,7 +171,10 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
         return y;
 
     }
+  */  
     
+    
+/*    
     public static Complex[] ifft() {
     	
     	int N = 16;
@@ -141,6 +212,9 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 
     }
     
+	*/
+	
+/*	
     public static Complex[] fft(Complex[] x) {
         int N = x.length;
 
@@ -176,7 +250,7 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
         }
         return y;
     }
-    
+ */   
     private static void appendToFile(String text){
 		try(
 				PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("transmitter_complex_out.txt", true)))) {

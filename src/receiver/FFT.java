@@ -60,7 +60,7 @@ public class FFT extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
 				push(after_fft[i]);
 //				System.out.print(after_fft[i]+"\t");
 			}
-			System.out.println();
+//			System.out.println();
 		}
 	}
 	

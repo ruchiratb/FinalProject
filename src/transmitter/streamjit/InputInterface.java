@@ -42,13 +42,13 @@ public class InputInterface extends edu.mit.streamjit.api.Pipeline<Byte, FEC_Fra
 	private static class Fill_Data_Field extends Filter<Byte, FEC_Frame> {
 		
 		public Fill_Data_Field() {
-			super(32128, 1);
+			super(64720, 1);	//  (32128,1)
 		}
 
 		@Override
 		public void work() {
 			System.out.println("\n\n============ Input Inteface ================");
-			boolean[] data = new boolean[32208];
+			boolean[] data = new boolean[64800];  // 32208
 			byte temp;
 			for (int i = 80; i < data.length; i++) {
 				temp = pop();
@@ -57,7 +57,8 @@ public class InputInterface extends edu.mit.streamjit.api.Pipeline<Byte, FEC_Fra
 				else
 					data[i] = false;
 			}
-			FEC_Frame frame = new FEC_Frame(data);
+			FEC_Frame frame = new FEC_Frame(data);						
+			
 			push(frame);
 		}
 

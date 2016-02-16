@@ -8,6 +8,13 @@ public class Super_Frame {
 		this.frame1 = f1;
 		this.frame2 = f2;
 	}
+	
+	public T2_Frame get_frame1(){
+		return frame1;
+	}
+	public T2_Frame get_frame2(){
+		return frame2;
+	}
 
 /*	public static void main(String[] args) {
 		int T2_frames_per_superframe, data_symbols_per_T2_frame;

@@ -16,7 +16,7 @@ public class FEC_Frame_Builder extends edu.mit.streamjit.api.Pipeline<Byte, FEC_
 
 		@Override
 		public void work() {
-			System.out.println("fec frame--------------------");
+//			System.out.println("fec frame--------------------");
 			boolean[] fec_data = new boolean[64800];
 			for (int i = 0; i < fec_data.length; i++) {
 				byte temp = pop();

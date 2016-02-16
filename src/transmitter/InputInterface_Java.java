@@ -81,15 +81,13 @@ public class InputInterface_Java {
 	private static void printDataField(FEC_Frame frame) {
 			boolean[] data = frame.FEC_frame;
 			System.out.println("\n-------------- Frame-----------------------");
-			for (int i = 0; i < data.length; i++) {
-				
+			for (int i = 0; i < data.length; i++) {				
 				if (data[i] == true) {
 					System.out.print("1 ");
 				}else {
 					System.out.print("0 ");
 				}
-			}
-		
+			}		
 	}
 	
 	private static void printDataField(ArrayList<FEC_Frame> frames) {

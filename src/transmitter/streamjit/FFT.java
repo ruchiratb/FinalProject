@@ -22,10 +22,10 @@ public class FFT {
 //	        Complex[] y = fft(x);
 //	        show(y, "y = fft(x)");
 	        
-	        IFFT iff = new IFFT();
-	        Complex[] z = fft(iff.ifft());
+//	        IFFT iff = new IFFT();
+//	        Complex[] z = fft(iff.ifft());
 	        
-	        show(z, "z");
+//	        show(z, "z");
 	}
 	
     public static Complex[] fft(Complex[] x) {

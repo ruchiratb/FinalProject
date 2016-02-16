@@ -47,7 +47,16 @@ public class BB_Header_Insertion extends edu.mit.streamjit.api.Pipeline<FEC_Fram
 				} else {
 					header_data[j] = false;
 				}
-			}		
+			}
+			
+/*			for (int i = 0; i < 100; i++) {
+				if (header_data[i] == true) {
+					System.out.print("1 ");
+				}else {
+					System.out.print("0 ");
+				}
+				
+			}*/
 		
 		return frame;
 	}

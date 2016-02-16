@@ -29,7 +29,7 @@ public class Scrambler extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Fra
 	}
 	
   public static FEC_Frame ScramblerOut(FEC_Frame frame){
-        int BBFRAMElength = 20;
+        int BBFRAMElength = 64800;
         int counter = 0;
         boolean newinput = false;
         boolean[] inputstream = frame.FEC_frame;

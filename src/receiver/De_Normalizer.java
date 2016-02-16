@@ -18,14 +18,14 @@ public class De_Normalizer extends edu.mit.streamjit.api.Pipeline<Complex, Compl
     private static class De_Normalizerout extends Filter<Complex, Complex> {
 		
 		public De_Normalizerout() {
-			super(64, 64);
+			super(8100, 8100);
 		}
 
 		@Override
 		public void work() {
-//			System.out.println("De Normalizer---------------");
+			System.out.println("De Normalizer---------------");
 			Complex out;
-	        for(int i=0; i<64; i++){
+	        for(int i=0; i<8100; i++){
 	        	Complex temp = pop();
 //	        	System.out.print("\n de norm in = "+temp);
 	            out = temp.times(Math.sqrt(170));
