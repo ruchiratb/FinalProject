@@ -1,27 +1,27 @@
 package receiver;
 
-import java.nio.ByteOrder;
-import java.nio.file.Paths;
-
 import org.jscience.mathematics.number.Complex;
 
-import com.jeffreybosboom.serviceproviderprocessor.ServiceProvider;
-
 import edu.mit.streamjit.api.Filter;
-import edu.mit.streamjit.api.Input;
-import edu.mit.streamjit.api.Pipeline;
-import edu.mit.streamjit.impl.compiler2.Compiler2StreamCompiler;
-import edu.mit.streamjit.test.Benchmark;
-import edu.mit.streamjit.test.Benchmarker;
-import edu.mit.streamjit.test.SuppliedBenchmark;
-
+import edu.mit.streamjit.api.RoundrobinJoiner;
+import edu.mit.streamjit.api.RoundrobinSplitter;
+import edu.mit.streamjit.api.Splitjoin;
 /*
  * source: http://algs4.cs.princeton.edu/99scientific/FFT.java
  */
 public class FFT extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
 	
+	@SuppressWarnings("unchecked")
 	public FFT(){
-		this.add(new dofft());
+//		this.add(new dofft());
+		this.add(
+				new Splitjoin<Complex,Complex>(
+							new RoundrobinSplitter<Complex>(64),
+							new RoundrobinJoiner<Complex>(64),
+							new dofft(), new dofft()
+							
+				)
+		);
 	}
 	/*public static void main(String[] args) {
 		 	int N = 8;
@@ -58,7 +58,7 @@ public class FFT extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
 			
 			for (int i = 0; i < after_fft.length; i++) {
 				push(after_fft[i]);
-//				System.out.print(after_fft[i]+"\t");
+//				System.out.println(after_fft[i]);
 			}
 //			System.out.println();
 		}

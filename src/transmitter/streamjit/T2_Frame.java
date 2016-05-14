@@ -5,10 +5,14 @@ import org.jscience.mathematics.number.Complex;
 
 public class T2_Frame {
 
-	Complex[] data;
+	public Complex[] data;
 	public T2_Frame(Complex[] frame_symbols){
 		this.data = frame_symbols;
 	}	
+	
+	public Complex[] get_data(){
+		return data;
+	}
 	
 /*	public  Complex[] getDataSymbols(){
 		double[] real = {5, 1.4, -3, 7.9, -4, 3.3, -5, 8.4};

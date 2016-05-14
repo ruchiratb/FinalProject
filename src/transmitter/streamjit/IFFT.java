@@ -17,7 +17,7 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 		this.add(new InverseFourier());
 	}
 	
-	private static class InverseFourier extends Filter<Super_Frame, Complex> {
+	public static class InverseFourier extends Filter<Super_Frame, Complex> {
 		
 		public InverseFourier() {
 			super(1, 128);
@@ -25,12 +25,17 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 
 		@Override
 		public void work() {
-			System.out.println("============ IFFT ================");
+//			System.out.println("============ IFFT ================");
 			Super_Frame frame = pop();
 			 T2_Frame t1 = frame.frame1;
 			 T2_Frame t2 = frame.frame2;
 			 Complex[] x1 = t1.data;
 			 Complex[] x2 = t2.data;
+			 
+			 /*System.out.println("ifft original data...");
+			 for (int i = 0; i < x1.length; i++) {
+				System.out.print(x1[i]+"  ");
+			}*/
 			 
 /*			 Complex[] X = new Complex[32768];
 			 for (int i = 0; i < x1.length; i++) {
@@ -45,11 +50,14 @@ public class IFFT extends edu.mit.streamjit.api.Pipeline<Super_Frame, Complex>{
 			 }*/
 			 
 			 Complex[] y1 = ifft(x1);
+//			 System.out.println("y1 = ifft(x1)");
 			 for (int i = 0; i < y1.length; i++) {
+//				System.out.println(y1[i]);
 				push(y1[i]);
 			 }
 			 
 			 Complex[] y2 = ifft(x2);
+//			 System.out.println("y2 = ifft(x2)");
 			 for (int i = 0; i < y2.length; i++) {
 				push(y2[i]);
 			}

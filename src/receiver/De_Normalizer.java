@@ -23,7 +23,7 @@ public class De_Normalizer extends edu.mit.streamjit.api.Pipeline<Complex, Compl
 
 		@Override
 		public void work() {
-			System.out.println("De Normalizer---------------");
+//			System.out.println("De Normalizer---------------");
 			Complex out;
 	        for(int i=0; i<8100; i++){
 	        	Complex temp = pop();

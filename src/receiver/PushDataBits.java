@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 
-import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import receiver.FEC_Frame;
 
 public class PushDataBits extends edu.mit.streamjit.api.Pipeline<FEC_Frame, Byte>{
 	
@@ -26,7 +25,7 @@ public class PushDataBits extends edu.mit.streamjit.api.Pipeline<FEC_Frame, Byte
 
 		@Override
 		public void work() {
-			System.out.println("data push----------------------");
+//			System.out.println("data push----------------------");
 			FEC_Frame current_frame = pop();
 			boolean[] data_array = current_frame.getFEC_Data();
 //			System.out.println("data array length="+data_array.length);

@@ -2,7 +2,7 @@ package transmitter.streamjit;
 
 
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import transmitter.streamjit.FEC_Frame;
 
 /**
  * 
@@ -57,6 +57,15 @@ public class InputInterface extends edu.mit.streamjit.api.Pipeline<Byte, FEC_Fra
 				else
 					data[i] = false;
 			}
+			
+			/*System.out.println("\nbefore header: ");
+			for (int j = 0; j < 100; j++) {
+				if (data[j] == true) {
+					System.out.print("1");
+				}else {
+					System.out.print("0");
+				}
+			}*/
 			FEC_Frame frame = new FEC_Frame(data);						
 			
 			push(frame);

@@ -1,7 +1,7 @@
 package transmitter.streamjit;
 
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import transmitter.streamjit.FEC_Frame;
 
 /**
  * 
@@ -41,6 +41,7 @@ public class BB_Header_Insertion extends edu.mit.streamjit.api.Pipeline<FEC_Fram
 	public static FEC_Frame insertHeader(FEC_Frame frame) {
 		boolean[] header_data;
 			header_data = frame.FEC_frame;
+			System.out.println(header_data.length);
 			for (int j = 0; j < header_length ; j++) {
 				if (header_str.charAt(j) == '1') {
 					header_data[j] = true;
@@ -49,14 +50,16 @@ public class BB_Header_Insertion extends edu.mit.streamjit.api.Pipeline<FEC_Fram
 				}
 			}
 			
-/*			for (int i = 0; i < 100; i++) {
+			/*System.out.println("\nafter header");
+			for (int i = 0; i < 100; i++) {
 				if (header_data[i] == true) {
-					System.out.print("1 ");
+					System.out.print("1");
 				}else {
-					System.out.print("0 ");
+					System.out.print("0");
 				}
 				
-			}*/
+			}
+			System.out.println();*/
 		
 		return frame;
 	}

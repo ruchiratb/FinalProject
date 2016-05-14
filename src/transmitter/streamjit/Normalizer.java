@@ -17,14 +17,21 @@ public class Normalizer extends edu.mit.streamjit.api.Pipeline<Complex, Complex>
 	private static class Normalize extends Filter<Complex, Complex> {
 		
 		public Normalize() {
-			super(1, 1);
+			super(8100, 8100);
 		}
 
 		@Override
-		public void work() {
-			Complex cellin = pop();
-			Complex cellout = cellin.divide(Math.sqrt(170));
-			push(cellout);
+		public void work() {			
+			System.out.println("Normalizer---------------------");
+			Complex out, temp;
+	        for(int i=0; i<8100; i++){
+	        	temp = pop();
+//	        	System.out.print("\n de norm in = "+temp);
+	            out = temp.divide(Math.sqrt(170));
+//	            System.out.println(out);
+	            push(out);
+//	            System.out.println("\t\tde norm out = "+De_Normalizerout[i]);
+	        }
 		}
 	}
     /*Complex[] Normalizerout(Complex[] Constmapout){

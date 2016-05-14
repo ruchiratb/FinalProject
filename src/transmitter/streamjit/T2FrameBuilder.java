@@ -3,7 +3,7 @@ package transmitter.streamjit;
 import org.jscience.mathematics.number.Complex;
 
 import edu.mit.streamjit.api.Filter;
-import transmitter.P2_Symbol;
+import transmitter.streamjit.P2_Symbol;
 
 public class T2FrameBuilder extends edu.mit.streamjit.api.Pipeline<Complex, T2_Frame>{
 	
@@ -21,9 +21,12 @@ public class T2FrameBuilder extends edu.mit.streamjit.api.Pipeline<Complex, T2_F
 		public void work() {
 //			System.out.println("============ T2 Frame Builder ================");
 			Complex[] cells = new Complex[64];
+//			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < cells.length; i++) {
 				cells[i] = pop();
+//				builder.append(cells[i].getReal()+" "+cells[i].getImaginary()+"__");
 			}
+//			System.out.println("t2 data "+builder.toString());
 			T2_Frame t2frame = new T2_Frame(cells);
 			push(t2frame);			
 		}

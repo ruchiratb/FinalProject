@@ -1,16 +1,24 @@
 package receiver;
 
-import java.util.Arrays;
-
-import org.jscience.mathematics.number.Complex;
-
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import edu.mit.streamjit.api.RoundrobinJoiner;
+import edu.mit.streamjit.api.RoundrobinSplitter;
+import edu.mit.streamjit.api.Splitjoin;
+import receiver.FEC_Frame;
 
 public class Column_De_Twister extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Frame>{
 	
+	@SuppressWarnings("unchecked")
 	public Column_De_Twister(){
-		this.add(new Detwister());
+//		this.add(new Detwister());
+		this.add(
+				new Splitjoin<FEC_Frame,FEC_Frame>(
+							new RoundrobinSplitter<FEC_Frame>(1),
+							new RoundrobinJoiner<FEC_Frame>(1),
+							new Detwister(), new Detwister()
+							
+				)
+		);
 	}
 	
 	private static class Detwister extends Filter<FEC_Frame, FEC_Frame> {
@@ -21,7 +29,7 @@ public class Column_De_Twister extends edu.mit.streamjit.api.Pipeline<FEC_Frame,
 
 		@Override
 		public void work() {
-			System.out.println("De Twister-------------");
+//			System.out.println("De Twister-------------");
 			FEC_Frame frame = pop();
 //			FEC_Frame frame_out = detwist(frame);
 			

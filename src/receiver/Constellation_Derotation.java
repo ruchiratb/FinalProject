@@ -2,14 +2,27 @@ package receiver;
 
 import org.jscience.mathematics.number.Complex;
 
+import edu.mit.streamjit.api.RoundrobinJoiner;
+import edu.mit.streamjit.api.RoundrobinSplitter;
+import edu.mit.streamjit.api.Splitjoin;
+
 /**
  *
  * @author Nipuna Priyamal
  */
 public class Constellation_Derotation extends edu.mit.streamjit.api.Pipeline<Complex, Complex>{
 	
+	@SuppressWarnings("unchecked")
 	public Constellation_Derotation(){
-		this.add(new DeRotator());
+//		this.add(new DeRotator());
+		this.add(
+				new Splitjoin<Complex,Complex>(
+							new RoundrobinSplitter<Complex>(8100),
+							new RoundrobinJoiner<Complex>(8100),
+							new DeRotator(), new DeRotator()
+							
+				)
+		);
 	}
     
 private static class DeRotator extends edu.mit.streamjit.api.Filter<Complex, Complex> {
@@ -21,10 +34,11 @@ private static class DeRotator extends edu.mit.streamjit.api.Filter<Complex, Com
 		@Override
 		public void work() {
 			int length = 8100;
-			System.out.println("----------constellation de-rotation-----------");
+//			System.out.println("constellation de-rotation-----------");
 			Complex[] before_rotate = new Complex[length];
 			for (int i = 0; i < before_rotate.length; i++) {
 				before_rotate[i] = pop();
+//				System.out.println("before rotate: "+before_rotate[i]);
 			}
 //			Complex[] after_rotate = De_Rotationout(before_rotate);
 			Complex[] after_rotate = new Complex[length];

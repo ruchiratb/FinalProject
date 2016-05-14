@@ -1,7 +1,7 @@
 package transmitter.streamjit;
 
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import transmitter.streamjit.FEC_Frame;
 
 public class Parity_Interleaver extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Frame>{
 	
@@ -44,6 +44,17 @@ public class Parity_Interleaver extends edu.mit.streamjit.api.Pipeline<FEC_Frame
 					}
 				}				
 			
+				System.out.println("\nbit interleaving");
+				for (int i = D_out.length-100; i < D_out.length; i++) {
+					if (D_out[i] == true) {
+						System.out.print("1");
+					}else {
+						System.out.print("0");
+					}
+					
+				}
+				System.out.println();
+				
 			FEC_Frame frame2 =  new FEC_Frame(D_out);
 			///////////////////////////////////////
 			push(frame2);

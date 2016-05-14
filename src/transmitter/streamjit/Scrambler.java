@@ -1,7 +1,7 @@
 package transmitter.streamjit;
 
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import transmitter.streamjit.FEC_Frame;
 
 /**
  *
@@ -46,8 +46,19 @@ public class Scrambler extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Fra
         		initialdata[0]=newinput;
                 counter++;
         	}        		
-       	} 	
-        	
+       	} 
+        
+       /* System.out.println("\nscrambbler");
+		for (int i = 0; i < 100; i++) {
+			if (outputstream[i] == true) {
+				System.out.print("1");
+			}else {
+				System.out.print("0");
+			}
+			
+		}
+		System.out.println();	*/
+        
         return new FEC_Frame(outputstream);
         
     }  

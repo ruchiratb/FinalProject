@@ -1,6 +1,6 @@
 package receiver;
 
-import transmitter.Eightout;
+import transmitter.streamjit.Eightout;
 import org.jscience.mathematics.number.Complex;
 
 import edu.mit.streamjit.api.Filter;
@@ -24,7 +24,7 @@ public class Constellation_De_mapper extends edu.mit.streamjit.api.Pipeline<Comp
 		@Override
 		public void work() {
 			int arraylength = 8100;
-			System.out.println("Constellation demapper work method -----------------------");
+//			System.out.println("Constellation demapper work method -----------------------");
 			Complex[] ML_out = new Complex[arraylength];
 			for (int i = 0; i < ML_out.length; i++) {
 				ML_out[i] = pop();
@@ -44,7 +44,7 @@ public class Constellation_De_mapper extends edu.mit.streamjit.api.Pipeline<Comp
 	         boolean[] array6 = new boolean[arraylength];
 	         boolean[] array7 = new boolean[arraylength];
 	              
-	         for(int i=0; i<4050; i++){//3 == 4050
+	         for(int i=0; i<8100; i++){//3 == 4050
 	             
 	               int real = 0;
 	               int img  = 0;

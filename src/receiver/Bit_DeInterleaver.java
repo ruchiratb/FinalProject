@@ -1,11 +1,23 @@
 package receiver;
 
-import transmitter.FEC_Frame;
+import edu.mit.streamjit.api.RoundrobinJoiner;
+import edu.mit.streamjit.api.RoundrobinSplitter;
+import edu.mit.streamjit.api.Splitjoin;
+import receiver.FEC_Frame;
 
 public class Bit_DeInterleaver extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Frame>{
 	
+	@SuppressWarnings("unchecked")
 	public Bit_DeInterleaver(){
-		this.add(new Bit_Deinterleave());
+//		this.add(new Bit_Deinterleave());
+		this.add(
+				new Splitjoin<FEC_Frame,FEC_Frame>(
+							new RoundrobinSplitter<FEC_Frame>(1),
+							new RoundrobinJoiner<FEC_Frame>(1),
+							new Bit_Deinterleave(), new Bit_Deinterleave()
+							
+				)
+		);
 	}
 	
 private static class Bit_Deinterleave extends edu.mit.streamjit.api.Filter<FEC_Frame, FEC_Frame> {
@@ -16,7 +28,7 @@ private static class Bit_Deinterleave extends edu.mit.streamjit.api.Filter<FEC_F
 
 		@Override
 		public void work() {
-			System.out.println("bit deinterleave--------------------");
+//			System.out.println("bit deinterleave--------------------");
 			FEC_Frame frame = pop();
 			boolean[] fec_data = frame.getFEC_Data();
 //			boolean[] interleaved_data = bitInterleave(fec_data);

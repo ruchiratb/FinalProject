@@ -3,7 +3,7 @@ package transmitter.streamjit;
 
 public class Super_Frame {
 	
-	T2_Frame frame1, frame2;
+	public T2_Frame frame1, frame2;
 	public Super_Frame(T2_Frame f1, T2_Frame f2){
 		this.frame1 = f1;
 		this.frame2 = f2;

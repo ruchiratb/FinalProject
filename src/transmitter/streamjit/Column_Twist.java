@@ -2,7 +2,7 @@ package transmitter.streamjit;
 
 
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
+import transmitter.streamjit.FEC_Frame;
 
 public class Column_Twist extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_Frame>{
 
@@ -55,6 +55,16 @@ public class Column_Twist extends edu.mit.streamjit.api.Pipeline<FEC_Frame, FEC_
 //			System.out.println(D_out[12]);
 //			System.out.println(D_Buffer[0][12]);	
 		
+			System.out.println("\ncolumn twist");
+			for (int i = 0; i < 100; i++) {
+				if (D_out[i] == true) {
+					System.out.print("1");
+				}else {
+					System.out.print("0");
+				}
+				
+			}
+			System.out.println();
 		return new FEC_Frame(D_out);
 	}
 	

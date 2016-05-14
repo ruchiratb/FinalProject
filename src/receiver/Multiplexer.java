@@ -1,12 +1,11 @@
 package receiver;
 
-import java.util.Random;
-
-import org.jscience.mathematics.number.Complex;
-
 import edu.mit.streamjit.api.Filter;
-import transmitter.FEC_Frame;
-import transmitter.Eightout;
+import edu.mit.streamjit.api.RoundrobinJoiner;
+import edu.mit.streamjit.api.RoundrobinSplitter;
+import edu.mit.streamjit.api.Splitjoin;
+import receiver.FEC_Frame;
+import transmitter.streamjit.Eightout;
 
 /**
  *
@@ -14,8 +13,17 @@ import transmitter.Eightout;
  */
 public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, FEC_Frame>{
     
+	@SuppressWarnings("unchecked")
 	public Multiplexer(){
-		this.add(new do_Multiplexing());
+//		this.add(new do_Multiplexing());
+		this.add(
+				new Splitjoin<Eightout,FEC_Frame>(
+							new RoundrobinSplitter<Eightout>(1),
+							new RoundrobinJoiner<FEC_Frame>(1),
+							new do_Multiplexing(), new do_Multiplexing()
+							
+				)
+		);
 	}
 	
 	private static class do_Multiplexing extends Filter<Eightout, FEC_Frame> {
@@ -26,7 +34,7 @@ public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, FEC_Fr
 
 		@Override
 		public void work() {
-			System.out.println("multiplexing---------------------");
+//			System.out.println("multiplexing---------------------");
 			Eightout eightout = pop();			
 //			boolean[] streamout = MultiplexerOut(eightout);		
 			
@@ -39,8 +47,23 @@ public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, FEC_Fr
 			 boolean[] array5 = eightout.getArray5();
 			 boolean[] array6 = eightout.getArray6();
 		     boolean[] array7 = eightout.getArray7(); 
-			  
-			  boolean[] stream = new boolean[64800];
+			 
+		     
+		     /*boolean temp2;
+		        System.out.println("Mux Array 0--------------");
+		   		for (int i = 0; i < 1000; i++) {
+		   			temp2 = array0[i];
+		   			if(temp2){
+		   				System.out.print("1");
+		   			}else {
+		   				System.out.print("0");
+		   			}
+		   		}
+		   		System.out.println();*/
+//		     printArray(array0, "array0 mux");
+//		     printArray(array1, "array1 mux");
+		     
+		     boolean[] stream = new boolean[64800];
 		        boolean[][] sixteenout = new boolean[4050][16];
 		        int x = 0;
 		        for(int i=0; i<4050; i++){         //3==8100
@@ -66,7 +89,7 @@ public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, FEC_Fr
 		            x = x+2;
 		        }
 		        
-		      /*  for(int i=0; i<3; i++){
+		       /* for(int i=0; i<4050; i++){
 		            for(int j=0; j<16; j++){
 		                System.out.printf(sixteenout[i][j]+" ");
 		            }
@@ -94,9 +117,29 @@ public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, FEC_Fr
 		            
 		            count=count+16;
 		        }
+		    
+			///////////////////////////////////  		        
+//			System.out.println("Multiplexer stream out size = "+stream.length);	
+//			printArray(stream, "outputstream mux");
+			//======================== SHIFT THE ARRAY ===============================
 			
-			///////////////////////////////////
-			System.out.println("Multiplexer stream out size = "+stream.length);	
+	/*		boolean[] shiftedstream = new boolean[64800];
+			
+			System.arraycopy(stream, 0, shiftedstream, 1, stream.length-2);
+			shiftedstream[0] = true;*/
+			//=====================================================
+			/*boolean temp;
+	        System.out.println("outputstream--------------");
+	   		for (int i = 0; i < 1000; i++) {
+	   			temp = shiftedstream[i];
+	   			if(temp){
+	   				System.out.print("1");
+	   			}else {
+	   				System.out.print("0");
+	   			}
+	   		}
+	   		System.out.println();*/
+			
 			FEC_Frame out = new FEC_Frame(stream);
 			push(out);
 			/*for (int i = 0; i < streamout.length; i++) {
@@ -119,7 +162,20 @@ public class Multiplexer extends edu.mit.streamjit.api.Pipeline<Eightout, FEC_Fr
 			}*/
 			/////////////////////////////////////////////		
 		}
-		
+		private static void printArray(boolean[] array, String text){
+			
+			 boolean temp;
+		        System.out.println(text+"--------------");
+		   		for (int i = 0; i < 1000; i++) {
+		   			temp = array[i];
+		   			if(temp){
+		   				System.out.print("1");
+		   			}else {
+		   				System.out.print("0");
+		   			}
+		   		}
+		   		System.out.println();
+		}
 		
 		private static boolean[] MultiplexerOut(Eightout eightout){
 			 boolean[] array0 = eightout.getArray0();

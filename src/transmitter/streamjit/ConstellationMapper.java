@@ -3,6 +3,7 @@ package transmitter.streamjit;
 import org.jscience.mathematics.number.Complex;
 
 import edu.mit.streamjit.api.Filter;
+import transmitter.streamjit.Eightout;
 /**
  *
  * @author Nipuna Priyamal
@@ -27,7 +28,7 @@ public class ConstellationMapper extends edu.mit.streamjit.api.Pipeline<Eightout
 //			Complex[] cells = Cellqueue(arrays);
 			
 			///////////////////////////////////////////////////////
-			boolean array0[] = arrays.getArray0();
+			 boolean array0[] = arrays.getArray0();
 	    	 boolean array1[] = arrays.getArray1();
 	    	 boolean array2[] = arrays.getArray2();
 	    	 boolean array3[] = arrays.getArray3();
@@ -45,7 +46,7 @@ public class ConstellationMapper extends edu.mit.streamjit.api.Pipeline<Eightout
 	         Complex Constmapout[] = new Complex[length]; //6=8100
 	      
 	         System.out.println(length);
-	         for(int i=0; i<length; i++){        //3 == 4050
+	         for(int i=0; i<length; i++){        
 	             
 	            if(array0[i]==true){
 	                real    = real  + (int)(Math.pow(2, 0));
@@ -152,10 +153,11 @@ public class ConstellationMapper extends edu.mit.streamjit.api.Pipeline<Eightout
 	         imgz   = 0; 
 	    }	        
 			////////////////////////////////////////////////////
-			
 			for (int i = 0; i < 8100; i++) {
+//				System.out.println(Constmapout[i]);
 				push(Constmapout[i]);
 			}
+			System.out.println();
 		}
 	}
      static Complex[] Cellqueue(Eightout arrays) {
